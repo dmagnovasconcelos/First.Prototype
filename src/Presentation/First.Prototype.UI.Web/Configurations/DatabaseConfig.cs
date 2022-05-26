@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace First.Prototype.Administrator.Api.Configurations
+namespace First.Prototype.UI.Web.Configurations
 {
   public static class DatabaseConfig
   {

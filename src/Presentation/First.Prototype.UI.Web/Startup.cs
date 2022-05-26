@@ -1,9 +1,5 @@
-using System.Net;
-
-using First.Prototype.Administrator.Api.Configurations;
 using First.Prototype.Core.Configurations;
-
-using MediatR;
+using First.Prototype.UI.Web.Configurations;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace First.Prototype.Administrator.Api
+namespace First.Prototype.UI.Web
 {
   public class Startup
   {
@@ -22,52 +18,43 @@ namespace First.Prototype.Administrator.Api
       Configuration = configuration;
     }
 
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if(env.IsDevelopment())
+      {
         app.UseDeveloperExceptionPage();
-
+      }
+      else
+      {
+        app.UseExceptionHandler("/Home/Error");
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+      }
       app.UseHttpsRedirection();
+      app.UseStaticFiles();
+
       app.UseRouting();
 
-      app.UseCors(c =>
-      {
-        c.AllowAnyHeader();
-        c.AllowAnyMethod();
-        c.AllowAnyOrigin();
-      });
-
-      app.UseAuthentication();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapControllers();
+        endpoints.MapControllerRoute(
+          name: "default",
+          pattern: "{controller=User}/{action=Index}/{id?}");
       });
-
-      app.UseSwaggerSetup();
     }
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMediatR(typeof(Startup));
-      services.AddHttpsRedirection(options =>
-      {
-        options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
-        options.HttpsPort = 5052;
-      });
-
-      services.AddMassTransitBusConfig(Configuration);
-      services.AddControllers();
-      services.AddHttpClient();
-      services.AddDatabaseConfig(Configuration);
-      services.AddAuthenticationConfig(Configuration);
-      services.AddSwaggerConfiguration("Administrator", "v1");
-      services.AddAutoMapperConfig();
       services.AddMediatorConfig();
+      services.AddAutoMapperConfig();
+      services.AddMassTransitBusConfig(Configuration);
+      services.AddDatabaseConfig(Configuration);
       services.AddDependencyConfig();
+      services.AddControllersWithViews();
     }
   }
 }

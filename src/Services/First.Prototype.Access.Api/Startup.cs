@@ -56,10 +56,10 @@ namespace First.Prototype.Access.Api
 
       services.AddControllers();
       services.AddHttpClient();
-      services.AddDatabaseConfiguration(Configuration);
+      services.AddDatabaseConfig(Configuration);
       services.AddAuthenticationConfig(Configuration);
       services.AddSwaggerConfiguration("Access", "v1");
-      services.AddAutoMapperConfiguration();
+      services.AddAutoMapperConfig();
       services.AddMediatorConfig();
       services.AddDependencyConfig();
     }

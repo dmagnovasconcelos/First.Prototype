@@ -1,10 +1,11 @@
 ﻿using System;
 
-using First.Prototype.Access.Application.AutoMapper;
+using First.Prototype.Administrator.Application.AutoMapper;
+using First.Prototype.Administrator.Domain.AutoMapper;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace First.Prototype.Access.Api.Configurations
+namespace First.Prototype.UI.Web.Configurations
 {
   public static class AutoMapperConfig
   {
@@ -13,6 +14,8 @@ namespace First.Prototype.Access.Api.Configurations
       if(services == null) throw new ArgumentNullException(nameof(services));
 
       services.AddAutoMapper(typeof(ViewModelToDomainMappingProfile));
+      services.AddAutoMapper(typeof(DomainToViewModelMappingProfile));
+      services.AddAutoMapper(typeof(DomainToEntityMappingProfile));
     }
   }
 }

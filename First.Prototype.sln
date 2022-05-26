@@ -44,6 +44,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "First.Prototype.Administrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "First.Prototype.Administrator.Consumer", "src\Services\First.Prototype.Administrator.Consumer\First.Prototype.Administrator.Consumer.csproj", "{C3063D11-2290-46BE-BC02-FA23FCA4B3BB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{4B6DA2C3-A228-424A-897C-F6D72464CF38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "First.Prototype.UI.Web", "src\Presentation\First.Prototype.UI.Web\First.Prototype.UI.Web.csproj", "{29DC9E49-3AC9-4A8E-968C-7C63577B1902}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +98,10 @@ Global
 		{C3063D11-2290-46BE-BC02-FA23FCA4B3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3063D11-2290-46BE-BC02-FA23FCA4B3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3063D11-2290-46BE-BC02-FA23FCA4B3BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29DC9E49-3AC9-4A8E-968C-7C63577B1902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DC9E49-3AC9-4A8E-968C-7C63577B1902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DC9E49-3AC9-4A8E-968C-7C63577B1902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DC9E49-3AC9-4A8E-968C-7C63577B1902}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{9098DB34-FCCC-45DD-BAB1-8AD95B0FB022} = {A72F8217-9156-4204-8263-BE67AC98452A}
 		{832587E6-03C6-4504-8BE6-2712B47827A4} = {5C901894-139A-4FAA-9E56-0A1F24FE15AB}
 		{C3063D11-2290-46BE-BC02-FA23FCA4B3BB} = {5C901894-139A-4FAA-9E56-0A1F24FE15AB}
+		{4B6DA2C3-A228-424A-897C-F6D72464CF38} = {8FF4A45D-511E-4871-B847-9B438D88AFA0}
+		{29DC9E49-3AC9-4A8E-968C-7C63577B1902} = {4B6DA2C3-A228-424A-897C-F6D72464CF38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECA51D65-7823-408A-AABB-2FEB842C85CB}

@@ -57,8 +57,8 @@ namespace First.Prototype.Administrator.Domain.Handlers
         await _repository.AddAsync(entity);
         await _unitOfWork.Commit();
 
-        await _queryRepository.InsertOneAsyn(entity).ConfigureAwait(false);
-        await SendUserEmail(entity).ConfigureAwait(false);
+        await _queryRepository.InsertOneAsyn(entity);
+        await SendUserEmail(entity);
 
         return UserResponse.Successfully(TypeOfUserResponse.RegisterNew);
       }
@@ -87,7 +87,7 @@ namespace First.Prototype.Administrator.Domain.Handlers
 
         _repository.Update(entity);
         await _unitOfWork.Commit();
-        await _queryRepository.ReplaceOneAsync(entity).ConfigureAwait(false);
+        await _queryRepository.ReplaceOneAsync(entity);
         return UserResponse.Successfully(TypeOfUserResponse.Update);
       }
       catch(Exception ex)
@@ -111,7 +111,7 @@ namespace First.Prototype.Administrator.Domain.Handlers
         _repository.Remove(entity);
         await _unitOfWork.Commit();
 
-        await _queryRepository.DeleteOneAsync(entity).ConfigureAwait(false);
+        await _queryRepository.DeleteOneAsync(entity);
         return UserResponse.Successfully(TypeOfUserResponse.Remove);
       }
       catch(Exception ex)
