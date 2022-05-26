@@ -4,13 +4,19 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <UserSecretsId>edac4dbb-eec4-4851-912a-2420f90937b1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="ExpectedObjects" Version="3.5.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Moq" Version="4.18.1" />
+    <PackageReference Include="WebMotions.Fake.Authentication.JwtBearer" Version="5.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="Xunit.DependencyInjection" Version="8.5.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -22,7 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Application\First.Prototype.Access.Application\First.Prototype.Access.Application.csproj" />
     <ProjectReference Include="..\..\src\Domain\First.Prototype.Access.Domain\First.Prototype.Access.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Services\First.Prototype.Access.Api\First.Prototype.Access.Api.csproj" />
   </ItemGroup>
 
 </Project>

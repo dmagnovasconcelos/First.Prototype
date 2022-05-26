@@ -30,7 +30,7 @@ namespace First.Prototype.Core.Controllers
         return response.ResponseFailure switch
         {
           TypeOfResponseFailure.Error => StatusCode((int)HttpStatusCode.InternalServerError, response),
-          TypeOfResponseFailure.NotAuthorized => Unauthorized(),
+          TypeOfResponseFailure.NotAuthorized => Unauthorized(response),
           TypeOfResponseFailure.NotFound => NotFound(),
           _ => BadRequest(response)
         };

@@ -1,9 +1,5 @@
-﻿using System.Text;
-
-using First.Prototype.Access.Domain.ValueObjects;
+﻿using First.Prototype.Access.Domain.ValueObjects;
 using First.Prototype.Core.Response;
-
-using FluentValidation.Results;
 
 namespace First.Prototype.Access.Domain.Responses
 {
@@ -31,6 +27,8 @@ namespace First.Prototype.Access.Domain.Responses
 
   public class AccessResponse : BaseResponse
   {
+    public const string AuthorizedMessage = "Authorized";
+
     public AccessResponse(bool success, string message, TypeOfResponseSuccess responseSuccess)
       : base(success, message, responseSuccess) { }
 
@@ -39,7 +37,7 @@ namespace First.Prototype.Access.Domain.Responses
 
     public static AccessResponse Authorized(AccessToken accessToken)
     {
-      return new(true, "Authorized", TypeOfResponseSuccess.Accepted)
+      return new(true, AuthorizedMessage, TypeOfResponseSuccess.Accepted)
       {
         Result = accessToken
       };
