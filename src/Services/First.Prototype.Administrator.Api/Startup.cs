@@ -59,6 +59,7 @@ namespace First.Prototype.Administrator.Api
         options.HttpsPort = 5052;
       });
 
+      services.AddMassTransitBusConfig(Configuration);
       services.AddControllers();
       services.AddHttpClient();
       services.AddDatabaseConfiguration(Configuration);

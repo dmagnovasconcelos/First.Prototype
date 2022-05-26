@@ -7,7 +7,12 @@ using First.Prototype.Administrator.Domain.Commands;
 using First.Prototype.Administrator.Domain.Entities;
 using First.Prototype.Administrator.Domain.Interfaces;
 using First.Prototype.Administrator.Domain.Responses;
+using First.Prototype.Core.Configurations;
 using First.Prototype.Core.Requests;
+
+using MassTransit;
+
+using Microsoft.Extensions.Options;
 
 namespace First.Prototype.Administrator.Domain.Handlers
 {
@@ -15,20 +20,26 @@ namespace First.Prototype.Administrator.Domain.Handlers
     , IRequestHandler<UpdateUserCommand, UserResponse>
     , IRequestHandler<RemoveUserCommand, UserResponse>
   {
+    private readonly IBus _bus;
+    private readonly BusOptions _busOptions;
     private readonly IMapper _mapper;
     private readonly IUserQueryRepository _queryRepository;
     private readonly IUserRepository _repository;
     private readonly IAdministratorUnitOfWork _unitOfWork;
 
-    public UserHandler(IUserRepository userRepository
-      , IAdministratorUnitOfWork userUnitOfWork
+    public UserHandler(IBus bus
       , IMapper mapper
-      , IUserQueryRepository queryRepository)
+      , IUserRepository repository
+      , IUserQueryRepository queryRepository
+      , IAdministratorUnitOfWork unitOfWork
+      , IOptions<BusOptions> busOptions)
     {
-      _repository = userRepository;
-      _unitOfWork = userUnitOfWork;
+      _bus = bus;
       _mapper = mapper;
+      _repository = repository;
       _queryRepository = queryRepository;
+      _unitOfWork = unitOfWork;
+      _busOptions = busOptions.Value;
     }
 
     public async Task<UserResponse> Handle(RegisterNewUserCommand command)
@@ -45,7 +56,10 @@ namespace First.Prototype.Administrator.Domain.Handlers
 
         await _repository.AddAsync(entity);
         await _unitOfWork.Commit();
+
         await _queryRepository.InsertOneAsyn(entity).ConfigureAwait(false);
+        await SendUserEmail(entity).ConfigureAwait(false);
+
         return UserResponse.Successfully(TypeOfUserResponse.RegisterNew);
       }
       catch(Exception ex)
@@ -104,6 +118,15 @@ namespace First.Prototype.Administrator.Domain.Handlers
       {
         //TODO: Create log record
         return UserResponse.Error(ex.Message);
+      }
+    }
+
+    private async Task SendUserEmail(User user)
+    {
+      if(user is not null)
+      {
+        var endPoint = await _bus.GetSendEndpoint(new Uri($"{_busOptions.Host}/{_busOptions.ReceiveEndpoint}"));
+        await endPoint.Send(user);
       }
     }
   }
