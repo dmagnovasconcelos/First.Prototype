@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using First.Prototype.Administrator.Domain.Entities;
 using First.Prototype.Core.Configurations;
@@ -11,7 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace First.Prototype.Administrator.Application.Services
 {
-  public class SendUserEmail : SendEmail<User>, ISendEmail<User>
+  public class SendUserEmail : SendEmail, ISendEmail<User>
   {
     public SendUserEmail(IOptions<EmailOptions> options)
       : base(options) { }

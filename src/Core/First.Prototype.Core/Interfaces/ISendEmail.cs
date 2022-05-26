@@ -4,7 +4,7 @@ using First.Prototype.Core.Entities;
 
 namespace First.Prototype.Core.Interfaces
 {
-  public interface ISendEmail<T> where T : Entity
+  public interface ISendEmail<in T> where T : Entity
   {
     Task SendEmailAsync(T entity);
   }

@@ -15,9 +15,20 @@ namespace First.Prototype.Access.Api
   {
     public IConfiguration Configuration { get; }
 
-    public Startup(IConfiguration configuration)
+    public Startup(IHostEnvironment env)
     {
-      Configuration = configuration;
+      var builder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", true, true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
+
+      if(env.IsDevelopment())
+      {
+        builder.AddUserSecrets<Startup>();
+      }
+
+      builder.AddEnvironmentVariables();
+      Configuration = builder.Build();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
