@@ -9,7 +9,7 @@ namespace First.Prototype.Administrator.Infrastructure.Mappings
   {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-      builder.ToTable("users", "public");
+      builder.ToTable("user", "public");
 
       builder.HasKey(e => e.Id);
 
