@@ -14,8 +14,8 @@ services:
   pgadmin4:
     image: dpage/pgadmin4:latest
     environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@hiper.com.br"
-      PGADMIN_DEFAULT_PASSWORD: Hiper123
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: Admin123
     volumes:
       - ./pgadmin-data:/var/lib/postgresql/data
     ports:
